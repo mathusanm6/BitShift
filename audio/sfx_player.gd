@@ -18,6 +18,7 @@ const VARIANTS := 3
 var volume := 1.0
 var cache: RenderCache
 
+var _player: AudioStreamPlayer
 var _playback: AudioStreamPlaybackPolyphonic
 var _rng := RandomNumberGenerator.new()
 
@@ -25,22 +26,29 @@ var _rng := RandomNumberGenerator.new()
 func start(render_cache: RenderCache) -> void:
 	cache = render_cache
 	_rng.randomize()
-	var player := AudioStreamPlayer.new()
+	_player = AudioStreamPlayer.new()
 	var poly := AudioStreamPolyphonic.new()
 	poly.polyphony = POLYPHONY
-	player.stream = poly
-	player.bus = &"Sfx"
-	add_child(player)
-	player.play()
-	_playback = player.get_stream_playback()
+	_player.stream = poly
+	_player.bus = &"Sfx"
+	add_child(_player)
+	_player.play()
+	_playback = _player.get_stream_playback()
 
 
 func stop() -> void:
+	if _player:
+		_player.stop()
 	_playback = null
 
 
 func play(sound: StringName, arg := 1.0) -> void:
-	if volume <= 0.0 or _playback == null:
+	if volume <= 0.0:
+		return
+	if _player and not _player.playing:
+		_player.play()
+		_playback = _player.get_stream_playback()
+	if _playback == null:
 		return
 	var wav := stream(sound, arg, _rng.randi() % VARIANTS if sound in VARIED else 0)
 	if wav:
