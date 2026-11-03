@@ -1,9 +1,17 @@
 # BitShift
 
 <p align="center">
-  <img src="icon.png" alt="BitShift" width="160" height="160">
+  <img src="docs/banner/banner_bitshift.png" alt="BitShift Banner" width="100%">
   <br>
   <em>An arcade puzzle game styled as a 1970s laboratory test instrument.</em>
+</p>
+
+## Gameplay Demo
+
+<p align="center">
+  <video src="docs/video/demo.mp4" controls width="340" style="max-width: 100%; border-radius: 8px;" poster="docs/screenshots/gameplay_action.png"></video>
+  <br>
+  <em>(If the embedded player doesn't load above, <a href="docs/video/demo.mp4">click here to watch demo.mp4</a>)</em>
 </p>
 
 ## Screenshots

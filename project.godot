@@ -44,6 +44,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
 
+[editor]
+
+movie_writer/movie_file="/Users/mathusanm6/Documents/bit-shift/docs/video/demo.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/godot_ai/plugin.cfg")
@@ -127,5 +131,6 @@ pointing/emulate_mouse_from_touch=false
 
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/msaa_2d=2
 environment/defaults/default_clear_color=Color(0.105882, 0.176471, 0.192157, 1)
