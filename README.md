@@ -10,10 +10,12 @@
 
 <p align="center">
   <a href="https://youtu.be/Nrycs1QVL5g">
-    <img src="https://img.youtube.com/vi/Nrycs1QVL5g/maxresdefault.jpg" alt="Watch BitShift Gameplay Demo" width="680" style="max-width: 100%; border-radius: 8px;">
+    <img src="docs/video/youtube_card.png" alt="Watch BitShift Gameplay Demo on YouTube" width="360" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,0.5);">
   </a>
-  <br>
-  <em>▶ <a href="https://youtu.be/Nrycs1QVL5g">Watch the gameplay demo on YouTube</a></em>
+  <br><br>
+  <a href="https://youtu.be/Nrycs1QVL5g">
+    <img src="https://img.shields.io/badge/YouTube-Watch%20Gameplay%20Demo-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch on YouTube">
+  </a>
 </p>
 
 ## Screenshots
