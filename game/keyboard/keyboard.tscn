@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/keyboard/keyboard.gd" id="1_keyboard"]
+[ext_resource type="Script" path="res://game/keyboard/key_cap.gd" id="2_key_cap"]
+[ext_resource type="Script" path="res://game/keyboard/fire_key.gd" id="3_fire_key"]
+[ext_resource type="Script" path="res://game/keyboard/slot_key.gd" id="4_slot_key"]
+[ext_resource type="Script" path="res://game/keyboard/right_key.gd" id="5_right_key"]
+[ext_resource type="Script" path="res://game/keyboard/switch_art.gd" id="6_switch_art"]
+[ext_resource type="Script" path="res://game/ui/print_label.gd" id="7_print_label"]
+
+[node name="Keyboard" type="Node2D"]
+script = ExtResource("1_keyboard")
+
+[node name="L" type="Node2D" parent="."]
+script = ExtResource("2_key_cap")
+id = &"L"
+palette = &"graphite"
+legend = "<<"
+caption = "SLIDE LEFT"
+hint_prefix = "← "
+hint_key = 65
+click_pitch = 0.8
+
+[node name="B0" type="Node2D" parent="."]
+script = ExtResource("2_key_cap")
+id = &"B0"
+palette = &"zero"
+legend = "0"
+caption = "LOAD 0"
+hint_prefix = "0 "
+hint_key = 74
+click_pitch = 0.9
+release_pitch = 0.9
+
+[node name="B1" type="Node2D" parent="."]
+script = ExtResource("2_key_cap")
+id = &"B1"
+palette = &"one"
+legend = "1"
+caption = "LOAD 1"
+hint_prefix = "1 "
+hint_key = 75
+click_pitch = 1.06
+
+[node name="F" type="Node2D" parent="."]
+script = ExtResource("3_fire_key")
+id = &"F"
+palette = &"fire"
+legend = "FIRE"
+hint_key = 32
+click_pitch = 0.65
+tilt_scale = 0.25
+
+[node name="S0" type="Node2D" parent="."]
+script = ExtResource("4_slot_key")
+id = &"S0"
+palette = &"putty"
+hint_key = 81
+click_pitch = 1.2
+
+[node name="S1" type="Node2D" parent="."]
+script = ExtResource("4_slot_key")
+id = &"S1"
+palette = &"putty"
+hint_key = 87
+click_pitch = 1.2
+
+[node name="S2" type="Node2D" parent="."]
+script = ExtResource("4_slot_key")
+id = &"S2"
+palette = &"putty"
+hint_key = 69
+click_pitch = 1.2
+
+[node name="R" type="Node2D" parent="."]
+script = ExtResource("5_right_key")
+id = &"R"
+palette = &"graphite"
+legend = ">>"
+caption = "SLIDE RIGHT"
+hint_prefix = "→ "
+hint_key = 68
+click_pitch = 0.8
+
+[node name="Switch" type="Node2D" parent="R"]
+show_behind_parent = true
+script = ExtResource("6_switch_art")
+
+[node name="Stage" type="Label" parent="R"]
+script = ExtResource("7_print_label")
+text = "SEATED"
+family = 1
+font_px = 11.0
+ink = &"INK"
+spacing = 0.88
+baseline = Vector2(124.5, -10)
+align = 2

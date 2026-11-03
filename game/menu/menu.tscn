@@ -1,0 +1,122 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/menu/menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://game/ui/instrument_theme.tres" id="2_instrument_theme"]
+[ext_resource type="Script" path="res://game/menu/settings_page.gd" id="3_settings_page"]
+
+[node name="Menu" type="PanelContainer"]
+theme = ExtResource("2_instrument_theme")
+layout_mode = 3
+offset_left = 76.0
+offset_top = 100.0
+offset_right = 540.0
+offset_bottom = 140.0
+custom_minimum_size = Vector2(464, 0)
+script = ExtResource("1_menu")
+
+[node name="Main" type="VBoxContainer" parent="."]
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Main"]
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 58
+text = "BITSHIFT"
+horizontal_alignment = 1
+
+[node name="Tagline" type="Label" parent="Main"]
+theme_type_variation = &"CaptionLabel"
+text = "SHOOT EACH COLUMN'S LOWEST BIT WITH THE SAME BIT."
+horizontal_alignment = 1
+
+[node name="Gap" type="Control" parent="Main"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 4)
+
+[node name="Start" type="Button" parent="Main"]
+custom_minimum_size = Vector2(0, 48)
+text = "START GAME"
+
+[node name="Tutorial" type="Button" parent="Main"]
+custom_minimum_size = Vector2(0, 44)
+text = "HOW TO PLAY"
+
+[node name="Settings" type="Button" parent="Main"]
+custom_minimum_size = Vector2(0, 44)
+text = "SETTINGS"
+
+[node name="Hint" type="Label" parent="Main"]
+theme_type_variation = &"CaptionLabel"
+text = "ARROWS TO CHOOSE  ·  ENTER TO SELECT"
+horizontal_alignment = 1
+
+[node name="SettingsPage" type="VBoxContainer" parent="."]
+theme_override_constants/separation = 14
+visible = false
+script = ExtResource("3_settings_page")
+
+[node name="Title" type="Label" parent="SettingsPage"]
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 36
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="Grid" type="GridContainer" parent="SettingsPage"]
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="SettingsPage/Grid"]
+theme_type_variation = &"CaptionLabel"
+theme_override_colors/font_color = Color(0.764706, 0.803922, 0.815686, 1.0)
+theme_override_font_sizes/font_size = 14
+text = "MUSIC"
+custom_minimum_size = Vector2(150, 0)
+
+[node name="Music" type="HSlider" parent="SettingsPage/Grid"]
+custom_minimum_size = Vector2(0, 28)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.1
+
+[node name="SoundLabel" type="Label" parent="SettingsPage/Grid"]
+theme_type_variation = &"CaptionLabel"
+theme_override_colors/font_color = Color(0.764706, 0.803922, 0.815686, 1.0)
+theme_override_font_sizes/font_size = 14
+text = "SOUNDS"
+custom_minimum_size = Vector2(150, 0)
+
+[node name="Sound" type="HSlider" parent="SettingsPage/Grid"]
+custom_minimum_size = Vector2(0, 28)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.1
+
+[node name="ShakeLabel" type="Label" parent="SettingsPage/Grid"]
+theme_type_variation = &"CaptionLabel"
+theme_override_colors/font_color = Color(0.764706, 0.803922, 0.815686, 1.0)
+theme_override_font_sizes/font_size = 14
+text = "SCREEN SHAKE"
+custom_minimum_size = Vector2(150, 0)
+
+[node name="Shake" type="Button" parent="SettingsPage/Grid"]
+custom_minimum_size = Vector2(0, 38)
+text = "ON"
+size_flags_horizontal = 3
+
+[node name="SpeedLabel" type="Label" parent="SettingsPage/Grid"]
+theme_type_variation = &"CaptionLabel"
+theme_override_colors/font_color = Color(0.764706, 0.803922, 0.815686, 1.0)
+theme_override_font_sizes/font_size = 14
+text = "START SPEED"
+custom_minimum_size = Vector2(150, 0)
+
+[node name="Speed" type="Button" parent="SettingsPage/Grid"]
+custom_minimum_size = Vector2(0, 38)
+text = "ON"
+size_flags_horizontal = 3
+
+[node name="Back" type="Button" parent="SettingsPage"]
+custom_minimum_size = Vector2(0, 44)
+text = "BACK"

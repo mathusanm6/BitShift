@@ -1,0 +1,187 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://game/settings.gd" id="2_settings"]
+[ext_resource type="Script" path="res://game/scorekeeper.gd" id="3_scorekeeper"]
+[ext_resource type="Script" path="res://game/actions.gd" id="4_actions"]
+[ext_resource type="Script" path="res://game/field/wave_spawner.gd" id="5_wave_spawner"]
+[ext_resource type="Script" path="res://game/bot/demo_bot.gd" id="6_demo_bot"]
+[ext_resource type="Script" path="res://game/tutorial/tutorial.gd" id="7_tutorial"]
+[ext_resource type="Script" path="res://game/input/player_input.gd" id="8_player_input"]
+[ext_resource type="Script" path="res://game/test_bench/test_bench.gd" id="9_test_bench"]
+[ext_resource type="Script" path="res://game/board/backdrop.gd" id="10_backdrop"]
+[ext_resource type="Script" path="res://game/board/board.gd" id="11_board"]
+[ext_resource type="Script" path="res://game/board/shake.gd" id="12_shake"]
+[ext_resource type="PackedScene" path="res://game/board/chassis.tscn" id="13_chassis"]
+[ext_resource type="PackedScene" path="res://game/panel/panel.tscn" id="14_panel"]
+[ext_resource type="PackedScene" path="res://game/field/field.tscn" id="15_field"]
+[ext_resource type="Script" path="res://game/field/aim_lines.gd" id="16_aim_lines"]
+[ext_resource type="Script" path="res://game/gun/shots.gd" id="17_shots"]
+[ext_resource type="PackedScene" path="res://game/gun/gun.tscn" id="18_gun"]
+[ext_resource type="Script" path="res://game/board/glass.gd" id="19_glass"]
+[ext_resource type="PackedScene" path="res://game/overlay/overlay.tscn" id="20_overlay"]
+[ext_resource type="PackedScene" path="res://game/keyboard/keyboard.tscn" id="21_keyboard"]
+[ext_resource type="Script" path="res://game/fx/fx.gd" id="22_fx"]
+[ext_resource type="Script" path="res://game/fx/red_flash.gd" id="23_red_flash"]
+[ext_resource type="PackedScene" path="res://game/splash/splash.tscn" id="24_splash"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1"]
+a = Vector2(4, -3000)
+b = Vector2(4, 2000)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_2"]
+a = Vector2(556, -3000)
+b = Vector2(556, 2000)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="Settings" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_settings")
+
+[node name="Scorekeeper" type="Node" parent="." node_paths=PackedStringArray("field")]
+unique_name_in_owner = true
+script = ExtResource("3_scorekeeper")
+field = NodePath("../Board/Shake/FieldClip/Field")
+
+[node name="Actions" type="Node" parent="." node_paths=PackedStringArray("field", "gun", "shots", "keyboard", "scorekeeper")]
+unique_name_in_owner = true
+script = ExtResource("4_actions")
+field = NodePath("../Board/Shake/FieldClip/Field")
+gun = NodePath("../Board/Shake/GunClip/Gun")
+shots = NodePath("../Board/Shake/ShotClip/Shots")
+keyboard = NodePath("../Board/Shake/Keyboard")
+scorekeeper = NodePath("../Scorekeeper")
+
+[node name="WaveSpawner" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_wave_spawner")
+
+[node name="DemoBot" type="Node" parent="." node_paths=PackedStringArray("field", "gun", "keyboard")]
+unique_name_in_owner = true
+script = ExtResource("6_demo_bot")
+field = NodePath("../Board/Shake/FieldClip/Field")
+gun = NodePath("../Board/Shake/GunClip/Gun")
+keyboard = NodePath("../Board/Shake/Keyboard")
+
+[node name="Tutorial" type="Node" parent="." node_paths=PackedStringArray("game")]
+unique_name_in_owner = true
+script = ExtResource("7_tutorial")
+game = NodePath("..")
+
+[node name="PlayerInput" type="Node" parent="." node_paths=PackedStringArray("game", "keyboard", "settings")]
+script = ExtResource("8_player_input")
+game = NodePath("..")
+keyboard = NodePath("../Board/Shake/Keyboard")
+settings = NodePath("../Settings")
+
+[node name="TestBench" type="Node" parent="." node_paths=PackedStringArray("game")]
+script = ExtResource("9_test_bench")
+game = NodePath("..")
+
+[node name="Backdrop" type="Node2D" parent="."]
+script = ExtResource("10_backdrop")
+
+[node name="Board" type="Node2D" parent="."]
+script = ExtResource("11_board")
+
+[node name="CaseWalls" type="StaticBody2D" parent="Board"]
+collision_mask = 0
+
+[node name="Left" type="CollisionShape2D" parent="Board/CaseWalls"]
+shape = SubResource("SegmentShape2D_1")
+
+[node name="Right" type="CollisionShape2D" parent="Board/CaseWalls"]
+shape = SubResource("SegmentShape2D_2")
+
+[node name="Shake" type="Node2D" parent="Board" node_paths=PackedStringArray("settings")]
+script = ExtResource("12_shake")
+settings = NodePath("../../Settings")
+
+[node name="Chassis" parent="Board/Shake" instance=ExtResource("13_chassis")]
+
+[node name="Panel" parent="Board/Shake" instance=ExtResource("14_panel") node_paths=PackedStringArray("scorekeeper", "field")]
+scorekeeper = NodePath("../../../Scorekeeper")
+field = NodePath("../FieldClip/Field")
+
+[node name="FieldClip" type="Control" parent="Board/Shake"]
+clip_contents = true
+layout_mode = 3
+offset_left = 65.0
+offset_top = 90.0
+offset_right = 551.0
+offset_bottom = 508.0
+mouse_filter = 2
+
+[node name="Field" parent="Board/Shake/FieldClip" instance=ExtResource("15_field")]
+unique_name_in_owner = true
+position = Vector2(-65, -90)
+
+[node name="AimLines" type="Node2D" parent="Board/Shake/FieldClip" node_paths=PackedStringArray("field", "gun")]
+position = Vector2(-65, -90)
+script = ExtResource("16_aim_lines")
+field = NodePath("../Field")
+gun = NodePath("../../GunClip/Gun")
+
+[node name="FieldFx" type="Node2D" parent="Board/Shake/FieldClip"]
+position = Vector2(-65, -90)
+
+[node name="ShotClip" type="Control" parent="Board/Shake"]
+clip_contents = true
+layout_mode = 3
+offset_left = 65.0
+offset_top = 90.0
+offset_right = 551.0
+offset_bottom = 520.0
+mouse_filter = 2
+
+[node name="Beams" type="Node2D" parent="Board/Shake/ShotClip"]
+position = Vector2(-65, -90)
+
+[node name="Shots" type="Node2D" parent="Board/Shake/ShotClip"]
+unique_name_in_owner = true
+position = Vector2(-65, -90)
+script = ExtResource("17_shots")
+
+[node name="GunClip" type="Control" parent="Board/Shake"]
+clip_contents = true
+layout_mode = 3
+offset_left = 65.0
+offset_top = 512.0
+offset_right = 551.0
+offset_bottom = 594.0
+mouse_filter = 2
+
+[node name="Gun" parent="Board/Shake/GunClip" instance=ExtResource("18_gun")]
+unique_name_in_owner = true
+position = Vector2(-65, -512)
+
+[node name="Ghosts" type="Node2D" parent="Board/Shake"]
+
+[node name="Glass" type="Node2D" parent="Board/Shake"]
+script = ExtResource("19_glass")
+
+[node name="Overlay" parent="Board/Shake" instance=ExtResource("20_overlay") node_paths=PackedStringArray("game", "tutorial", "settings")]
+game = NodePath("../../..")
+tutorial = NodePath("../../../Tutorial")
+settings = NodePath("../../../Settings")
+
+[node name="Keyboard" parent="Board/Shake" instance=ExtResource("21_keyboard") node_paths=PackedStringArray("debris_layer", "field")]
+unique_name_in_owner = true
+debris_layer = NodePath("../../Debris")
+field = NodePath("../FieldClip/Field")
+
+[node name="Fx" type="Node2D" parent="Board/Shake" node_paths=PackedStringArray("field_layer", "beam_layer", "ghost_layer", "right_key")]
+script = ExtResource("22_fx")
+field_layer = NodePath("../FieldClip/FieldFx")
+beam_layer = NodePath("../ShotClip/Beams")
+ghost_layer = NodePath("../Ghosts")
+right_key = NodePath("../Keyboard/R")
+
+[node name="RedFlash" type="Node2D" parent="Board/Shake"]
+script = ExtResource("23_red_flash")
+
+[node name="Debris" type="Node2D" parent="Board"]
+
+[node name="Splash" parent="." instance=ExtResource("24_splash")]

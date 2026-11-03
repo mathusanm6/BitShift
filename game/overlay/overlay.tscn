@@ -1,0 +1,148 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/overlay/overlay.gd" id="1_overlay"]
+[ext_resource type="PackedScene" path="res://game/menu/menu.tscn" id="2_menu"]
+[ext_resource type="PackedScene" path="res://game/tutorial/tutorial_card.tscn" id="3_tutorial_card"]
+[ext_resource type="Theme" path="res://game/ui/instrument_theme.tres" id="4_instrument_theme"]
+[ext_resource type="Script" path="res://game/ui/print_label.gd" id="5_print_label"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.0235294, 0.054902, 0.0666667, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.309804, 0.239216, 1.0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Overlay" type="Node2D"]
+script = ExtResource("1_overlay")
+
+[node name="Menu" parent="." instance=ExtResource("2_menu")]
+
+[node name="TutorialCard" parent="." instance=ExtResource("3_tutorial_card")]
+visible = false
+
+[node name="Paused" type="PanelContainer" parent="."]
+theme = ExtResource("4_instrument_theme")
+layout_mode = 3
+offset_left = 76.0
+offset_top = 210.0
+offset_right = 540.0
+offset_bottom = 250.0
+custom_minimum_size = Vector2(464, 0)
+visible = false
+
+[node name="Rows" type="VBoxContainer" parent="Paused"]
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Paused/Rows"]
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 42
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Paused/Rows"]
+theme_override_constants/separation = 10
+
+[node name="Resume" type="Button" parent="Paused/Rows/Buttons"]
+custom_minimum_size = Vector2(0, 44)
+text = "RESUME"
+size_flags_horizontal = 3
+
+[node name="Menu" type="Button" parent="Paused/Rows/Buttons"]
+custom_minimum_size = Vector2(0, 44)
+text = "MENU"
+size_flags_horizontal = 3
+
+[node name="GameOver" type="Panel" parent="."]
+theme = ExtResource("4_instrument_theme")
+visible = false
+layout_mode = 3
+offset_left = 76.0
+offset_top = 130.0
+offset_right = 540.0
+offset_bottom = 390.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1")
+
+[node name="Title" type="Label" parent="GameOver"]
+script = ExtResource("5_print_label")
+text = "STACK OVERFLOW"
+family = 0
+font_px = 42.0
+ink = &"FAULT"
+spacing = 0.0
+baseline = Vector2(232, 58)
+align = 1
+
+[node name="ScoreCaption" type="Label" parent="GameOver"]
+script = ExtResource("5_print_label")
+text = "SCORE"
+family = 1
+font_px = 13.0
+ink = &"STEEL"
+spacing = 1.3
+baseline = Vector2(40, 102)
+align = 0
+
+[node name="Score" type="Label" parent="GameOver"]
+script = ExtResource("5_print_label")
+text = "0000000"
+family = 0
+font_px = 38.0
+ink = &"ONE"
+spacing = 0.0
+baseline = Vector2(40, 142)
+align = 0
+
+[node name="BestCaption" type="Label" parent="GameOver"]
+script = ExtResource("5_print_label")
+text = "BEST"
+family = 1
+font_px = 13.0
+ink = &"STEEL"
+spacing = 1.3
+baseline = Vector2(424, 102)
+align = 2
+
+[node name="Best" type="Label" parent="GameOver"]
+script = ExtResource("5_print_label")
+text = "0000000"
+family = 0
+font_px = 38.0
+ink = &"STEEL"
+spacing = 0.0
+baseline = Vector2(424, 142)
+align = 2
+
+[node name="Summary" type="Label" parent="GameOver"]
+script = ExtResource("5_print_label")
+text = "Reached level 1. Destroyed 0 bits."
+family = 2
+font_px = 18.0
+ink = &"WHITE"
+spacing = 0.0
+baseline = Vector2(232, 178)
+align = 1
+
+[node name="Buttons" type="HBoxContainer" parent="GameOver"]
+theme_override_constants/separation = 10
+layout_mode = 0
+offset_left = 24.0
+offset_top = 200.0
+offset_right = 440.0
+offset_bottom = 242.0
+
+[node name="Again" type="Button" parent="GameOver/Buttons"]
+custom_minimum_size = Vector2(0, 44)
+text = "PLAY AGAIN"
+size_flags_horizontal = 3
+
+[node name="Menu" type="Button" parent="GameOver/Buttons"]
+custom_minimum_size = Vector2(0, 44)
+text = "MENU"
+size_flags_horizontal = 3

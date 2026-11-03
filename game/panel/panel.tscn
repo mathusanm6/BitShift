@@ -1,0 +1,90 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/panel/panel.gd" id="1_panel"]
+[ext_resource type="Script" path="res://game/panel/danger_band.gd" id="2_danger_band"]
+[ext_resource type="Script" path="res://game/panel/hp_bar.gd" id="3_hp_bar"]
+[ext_resource type="Script" path="res://game/panel/wall_flash.gd" id="4_wall_flash"]
+[ext_resource type="Script" path="res://game/ui/print_label.gd" id="5_print_label"]
+[ext_resource type="Script" path="res://game/panel/led.gd" id="6_led"]
+
+[node name="Panel" type="Node2D"]
+script = ExtResource("1_panel")
+
+[node name="DangerBand" type="Node2D" parent="."]
+script = ExtResource("2_danger_band")
+
+[node name="HpBar" type="Node2D" parent="."]
+script = ExtResource("3_hp_bar")
+
+[node name="WallFlash" type="Node2D" parent="."]
+script = ExtResource("4_wall_flash")
+
+[node name="LevelCaption" type="Label" parent="."]
+script = ExtResource("5_print_label")
+text = "LVL"
+family = 1
+font_px = 10.0
+ink = &"STEEL"
+spacing = 1.0
+baseline = Vector2(272, 27)
+align = 0
+
+[node name="Level" type="Label" parent="."]
+script = ExtResource("5_print_label")
+text = "01"
+family = 0
+font_px = 24.0
+ink = &"ONE"
+spacing = 0.0
+baseline = Vector2(272, 51)
+align = 0
+
+[node name="ComboCaption" type="Label" parent="."]
+script = ExtResource("5_print_label")
+text = "COMBO"
+family = 1
+font_px = 10.0
+ink = &"STEEL"
+spacing = 1.0
+baseline = Vector2(320, 27)
+align = 0
+
+[node name="Combo" type="Label" parent="."]
+script = ExtResource("5_print_label")
+text = "x0"
+family = 0
+font_px = 24.0
+ink = &"STEEL_LO"
+spacing = 0.0
+baseline = Vector2(320, 51)
+align = 0
+
+[node name="ScoreCaption" type="Label" parent="."]
+script = ExtResource("5_print_label")
+text = "SCORE"
+family = 1
+font_px = 10.0
+ink = &"STEEL"
+spacing = 1.0
+baseline = Vector2(540, 27)
+align = 2
+
+[node name="Score" type="Label" parent="."]
+script = ExtResource("5_print_label")
+text = "0000000"
+family = 0
+font_px = 26.0
+ink = &"ONE"
+spacing = 0.0
+baseline = Vector2(540, 51)
+align = 2
+
+[node name="ClockLed" type="Node2D" parent="."]
+position = Vector2(40, 96)
+script = ExtResource("6_led")
+
+[node name="BeatLed" type="Node2D" parent="."]
+position = Vector2(40, 126)
+script = ExtResource("6_led")
+ink = &"ONE"
+fade_rate = 7.0

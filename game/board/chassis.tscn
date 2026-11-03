@@ -1,0 +1,208 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/board/chassis.gd" id="1_chassis"]
+[ext_resource type="Script" path="res://game/ui/print_label.gd" id="2_print_label"]
+
+[node name="Chassis" type="Node2D"]
+script = ExtResource("1_chassis")
+
+[node name="Title" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "BITSHIFT"
+family = 0
+font_px = 36.0
+ink = &"INK"
+spacing = 1.0
+baseline = Vector2(28, 43)
+align = 0
+
+[node name="Model" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "BS-5  /  4-BIT CANNON, 5 COLUMNS"
+family = 1
+font_px = 10.5
+ink = &"INK"
+spacing = 0.84
+baseline = Vector2(29, 57)
+align = 0
+
+[node name="ColumnNumber0" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "0"
+family = 4
+font_px = 11.0
+ink = &"STEEL_LO"
+spacing = 0.0
+baseline = Vector2(116, 82)
+align = 1
+
+[node name="ColumnNumber1" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "1"
+family = 4
+font_px = 11.0
+ink = &"STEEL_LO"
+spacing = 0.0
+baseline = Vector2(212, 82)
+align = 1
+
+[node name="ColumnNumber2" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "2"
+family = 4
+font_px = 11.0
+ink = &"STEEL_LO"
+spacing = 0.0
+baseline = Vector2(308, 82)
+align = 1
+
+[node name="ColumnNumber3" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "3"
+family = 4
+font_px = 11.0
+ink = &"STEEL_LO"
+spacing = 0.0
+baseline = Vector2(404, 82)
+align = 1
+
+[node name="ColumnNumber4" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "4"
+family = 4
+font_px = 11.0
+ink = &"STEEL_LO"
+spacing = 0.0
+baseline = Vector2(500, 82)
+align = 1
+
+[node name="CannonLegend" type="Label" parent="."]
+rotation = -1.5707964
+script = ExtResource("2_print_label")
+text = "4-BIT CANNON"
+family = 1
+font_px = 13.0
+ink = &"STEEL_LO"
+spacing = 2.9
+baseline = Vector2(44, 230)
+align = 1
+
+[node name="ClockLegend" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "CLK"
+family = 1
+font_px = 10.0
+ink = &"STEEL_LO"
+spacing = 1.0
+baseline = Vector2(40, 86)
+align = 1
+
+[node name="BeatLegend" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "BEAT"
+family = 1
+font_px = 10.0
+ink = &"STEEL_LO"
+spacing = 1.0
+baseline = Vector2(40, 116)
+align = 1
+
+[node name="ColumnLegend0" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "C0"
+family = 1
+font_px = 11.5
+ink = &"INK"
+spacing = 0.7
+baseline = Vector2(116, 613)
+align = 1
+
+[node name="ColumnLegend1" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "C1"
+family = 1
+font_px = 11.5
+ink = &"INK"
+spacing = 0.7
+baseline = Vector2(212, 613)
+align = 1
+
+[node name="ColumnLegend2" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "C2"
+family = 1
+font_px = 11.5
+ink = &"INK"
+spacing = 0.7
+baseline = Vector2(308, 613)
+align = 1
+
+[node name="ColumnLegend3" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "C3"
+family = 1
+font_px = 11.5
+ink = &"INK"
+spacing = 0.7
+baseline = Vector2(404, 613)
+align = 1
+
+[node name="ColumnLegend4" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "C4"
+family = 1
+font_px = 11.5
+ink = &"INK"
+spacing = 0.7
+baseline = Vector2(500, 613)
+align = 1
+
+[node name="HpLegend" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "HP"
+family = 1
+font_px = 11.5
+ink = &"INK"
+spacing = 0.7
+baseline = Vector2(38, 613)
+align = 1
+
+[node name="WrapLegend" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "LEFT WALL WRAP = -1 HP"
+family = 1
+font_px = 11.0
+ink = &"INK"
+spacing = 0.44
+baseline = Vector2(14, 714)
+align = 0
+
+[node name="LoadLegend" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "LOADS RIGHT CHAMBER"
+family = 1
+font_px = 11.0
+ink = &"INK"
+spacing = 0.44
+baseline = Vector2(280, 714)
+align = 1
+
+[node name="DurabilityLegend" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "DUR"
+family = 1
+font_px = 11.0
+ink = &"INK"
+spacing = 0.88
+baseline = Vector2(423.5, 714)
+align = 0
+
+[node name="Footer" type="Label" parent="."]
+script = ExtResource("2_print_label")
+text = "EMPTY SLOT SIPHONS 4 BITS.  FILLED SLOT LOADS AND DASHES RIGHT."
+family = 1
+font_px = 11.0
+ink = &"INK"
+spacing = 0.55
+baseline = Vector2(280, 946)
+align = 1

@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/keyboard/loose_cap.gd" id="1_loose_cap"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1"]
+friction = 0.0
+bounce = 0.45
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
+size = Vector2(126.5, 112)
+
+[node name="LooseCap" type="RigidBody2D"]
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_1")
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_loose_cap")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2")
