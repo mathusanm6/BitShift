@@ -1,1 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128"><rect width="124" height="124" x="2" y="2" fill="#363d52" stroke="#212532" stroke-width="4" rx="14"/><g fill="#fff" transform="translate(12.322 12.322)scale(.101)"><path d="M105 673v33q407 354 814 0v-33z"/><path fill="#478cbf" d="m105 673 152 14q12 1 15 14l4 67 132 10 8-61q2-11 15-15h162q13 4 15 15l8 61 132-10 4-67q3-13 15-14l152-14V427q30-39 56-81-35-59-83-108-43 20-82 47-40-37-88-64 7-51 8-102-59-28-123-42-26 43-46 89-49-7-98 0-20-46-46-89-64 14-123 42 1 51 8 102-48 27-88 64-39-27-82-47-48 49-83 108 26 42 56 81zm0 33v39c0 276 813 276 814 0v-39l-134 12-5 69q-2 10-14 13l-162 11q-12 0-16-11l-10-65H446l-10 65q-4 11-16 11l-162-11q-12-3-14-13l-5-69z"/><path d="M483 600c0 34 58 34 58 0v-86c0-34-58-34-58 0z"/><circle cx="725" cy="526" r="90"/><circle cx="299" cy="526" r="90"/></g><g fill="#414042" transform="translate(12.322 12.322)scale(.101)"><circle cx="307" cy="532" r="60"/><circle cx="717" cy="532" r="60"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Background bezel gradient -->
+    <linearGradient id="bezel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a5156" />
+      <stop offset="50%" stop-color="#1b2d31" />
+      <stop offset="100%" stop-color="#142124" />
+    </linearGradient>
+
+    <!-- CRT screen gradient -->
+    <radialGradient id="screen" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#0e1d22" />
+      <stop offset="70%" stop-color="#060e11" />
+      <stop offset="100%" stop-color="#020507" />
+    </radialGradient>
+
+    <!-- Cyan glow for 0 -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Amber glow for 1 -->
+    <filter id="glow-amber" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Outer chassis frame -->
+  <rect x="4" y="4" width="120" height="120" rx="20" fill="url(#bezel)" stroke="#748a8f" stroke-width="2.5" />
+  
+  <!-- Corner bolts / instrument screws -->
+  <circle cx="14" cy="14" r="2.2" fill="#566469" stroke="#93a6aa" stroke-width="0.8" />
+  <circle cx="114" cy="14" r="2.2" fill="#566469" stroke="#93a6aa" stroke-width="0.8" />
+  <circle cx="14" cy="114" r="2.2" fill="#566469" stroke="#93a6aa" stroke-width="0.8" />
+  <circle cx="114" cy="114" r="2.2" fill="#566469" stroke="#93a6aa" stroke-width="0.8" />
+
+  <!-- CRT glass screen -->
+  <rect x="15" y="15" width="98" height="84" rx="10" fill="url(#screen)" stroke="#2e4449" stroke-width="1.5" />
+
+  <!-- Oscilloscope scanlines -->
+  <path d="M 15 28 L 113 28 M 15 42 L 113 42 M 15 56 L 113 56 M 15 70 L 113 70 M 15 84 L 113 84" stroke="#0e1d22" stroke-width="1" opacity="0.4" />
+  <path d="M 39 15 L 39 99 M 64 15 L 64 99 M 89 15 L 89 99" stroke="#0e1d22" stroke-width="1" stroke-dasharray="2,3" opacity="0.3" />
+
+  <!-- Glowing Digital '0' (Cyan) -->
+  <g filter="url(#glow-cyan)">
+    <!-- 0 block -->
+    <rect x="26" y="27" width="30" height="46" rx="6" fill="#0a3039" stroke="#63d8ea" stroke-width="4" />
+    <text x="41" y="59" font-family="-apple-system, BlinkMacSystemFont, 'IBM Plex Mono', monospace" font-size="28" font-weight="900" fill="#63d8ea" text-anchor="middle">0</text>
+  </g>
+
+  <!-- Glowing Digital '1' (Amber) -->
+  <g filter="url(#glow-amber)">
+    <!-- 1 block -->
+    <rect x="72" y="27" width="30" height="46" rx="6" fill="#3c2400" stroke="#ffb42e" stroke-width="4" />
+    <text x="87" y="59" font-family="-apple-system, BlinkMacSystemFont, 'IBM Plex Mono', monospace" font-size="28" font-weight="900" fill="#ffb42e" text-anchor="middle">1</text>
+  </g>
+
+  <!-- Shift symbols '>>' in center -->
+  <path d="M 59 44 L 64 50 L 59 56" fill="none" stroke="#86e28f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 65 44 L 70 50 L 65 56" fill="none" stroke="#86e28f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Bottom Instrument plate & model text -->
+  <rect x="18" y="104" width="92" height="14" rx="3" fill="#0b171b" stroke="#2e4449" stroke-width="1" />
+  <text x="64" y="114.5" font-family="-apple-system, BlinkMacSystemFont, 'IBM Plex Mono', monospace" font-size="8.5" font-weight="700" fill="#d8e3e4" letter-spacing="1.5" text-anchor="middle">BITSHIFT · BS-5</text>
+</svg>
