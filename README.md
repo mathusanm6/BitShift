@@ -9,9 +9,11 @@
 ## Gameplay Demo
 
 <p align="center">
-  <video src="docs/video/demo.mp4" controls width="340" style="max-width: 100%; border-radius: 8px;" poster="docs/screenshots/gameplay_action.png"></video>
+  <a href="https://youtu.be/Nrycs1QVL5g">
+    <img src="https://img.youtube.com/vi/Nrycs1QVL5g/maxresdefault.jpg" alt="Watch BitShift Gameplay Demo" width="680" style="max-width: 100%; border-radius: 8px;">
+  </a>
   <br>
-  <em>(If the embedded player doesn't load above, <a href="docs/video/demo.mp4">click here to watch demo.mp4</a>)</em>
+  <em>▶ <a href="https://youtu.be/Nrycs1QVL5g">Watch the gameplay demo on YouTube</a></em>
 </p>
 
 ## Screenshots
