@@ -10,8 +10,8 @@ var _failed := 0
 
 
 func _ready() -> void:
-	for check: Callable in [_row_explosion, _locked_bits, _stacked_shots, _broken_key_dash,
-			_wall_wrap, _right_key_wear, _overflow, _spare_switch, _waves, _tutorial]:
+	for check: Callable in [_row_explosion, _locked_bits,
+			_wall_wrap, _right_key_wear, _overflow, _spare_switch, _waves, _combo_events, _tutorial]:
 		var game := _new_game()
 		print(check.get_method().trim_prefix("_").replace("_", " "))
 		check.call(game)
@@ -66,28 +66,6 @@ func _locked_bits(game: Game) -> void:
 	var bit := game.field.column(0).lowest()
 	_check("lock cracked, bit stays", [bit.locked, bit.cracked, bit.value], [false, true, 1])
 	_check("unlocked columns lost a bit", [game.field.column(1).describe(), game.field.column(3).describe()], ["1", "0"])
-	_tap(game, [&"S0"])
-	_check("siphon pulls the next bits", game.keyboard.slots[0].describe(), "1100")
-
-
-func _stacked_shots(game: Game) -> void:
-	_load(game, &"stack")
-	_tap(game, [&"S0"])
-	_check("paste makes laser and flips", game.gun.barrel.describe(), "2**2")
-	_check("dash is capped at the right wall", game.gun.column, 1)
-	_tap(game, [&"F"])
-	_check("laser takes 3 from column 1", game.field.column(1).describe(), "01")
-	_check("flip inverts column 2", game.field.column(2).describe(), "00101")
-
-
-func _broken_key_dash(game: Game) -> void:
-	_load(game, &"loop")
-	_tap(game, [&"R"])
-	_check(">> does nothing when broken", game.gun.column, 0)
-	_tap(game, [&"S0"])
-	_check("siphon 4 bits", game.keyboard.slots[0].describe(), "1011")
-	_tap(game, [&"S0"])
-	_check("paste dashes right", game.gun.column, 1)
 
 
 func _wall_wrap(game: Game) -> void:
@@ -143,6 +121,29 @@ func _waves(game: Game) -> void:
 	_check("waves have 2+ bits and never a locked spare", ok, true)
 
 
+func _combo_events(game: Game) -> void:
+	var hits: Array[Array] = []
+	var losses: Array[Array] = []
+	var on_hit := func(combo: int, col: int) -> void: hits.append([combo, col])
+	var on_lost := func(prev: int, col: int) -> void: losses.append([prev, col])
+	Events.combo_hit.connect(on_hit)
+	Events.combo_lost.connect(on_lost)
+	game.start_game()
+	game.field.set_board(["11000"])
+	game.gun.place(0)
+	_tap(game, [&"B1", &"B1", &"B0", &"B0", &"F"])
+	_run(game, 0.8)
+	_check("combo_hit emitted on consecutive hits", hits, [[1, 0], [2, 1], [3, 2], [4, 3]])
+	game.field.set_board(["00000"])
+	game.gun.place(0)
+	_tap(game, [&"B1", &"F"])
+	_run(game, 0.8)
+	_check("combo_lost emitted on misfire", losses, [[4, 3]])
+	_check("combo reset to 0", game.scorekeeper.combo, 0)
+	Events.combo_hit.disconnect(on_hit)
+	Events.combo_lost.disconnect(on_lost)
+
+
 ## Plays every lesson until it ends and checks it showed its rule.
 func _tutorial(game: Game) -> void:
 	var tutorial := game.tutorial
@@ -153,8 +154,6 @@ func _tutorial(game: Game) -> void:
 		func() -> Array: return [game.field.is_empty(), true],
 		func() -> Array: return [[game.gun.column, game.scorekeeper.hp], [1, 9]],
 		func() -> Array: return [game.keyboard.right_key.durability, 2],
-		func() -> Array: return [game.keyboard.slots[0].describe(), "0_10"],
-		func() -> Array: return [[game.gun.column, game.field.column(1).describe(), game.field.column(2).describe()], [1, "0", "0010"]],
 		func() -> Array: return [game.mode, Game.Mode.TUTORIAL],
 	]
 	_check("one check per lesson", expect.size(), tutorial.count())

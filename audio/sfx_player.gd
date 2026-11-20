@@ -71,4 +71,6 @@ func _quantize(sound: StringName, arg: float) -> float:
 		&"tick": return clampf(snappedf(arg, 0.25), 0.25, 1.0)
 		&"shatter": return clampf(roundf(arg), 0.0, 10.0)
 		&"row_clear": return clampf(roundf(arg), 1.0, 6.0)
+		&"combo_hit": return clampf(roundf(arg), 2.0, 15.0)
+		&"combo_lost": return 5.0 if arg >= 5.0 else 2.0
 	return snappedf(arg, 0.01)

@@ -7,13 +7,15 @@ const Shapes := preload("res://game/art/shapes.gd")
 var _rect := Rect2()
 var _radius := 0.0
 var _dur := 0.2
+var _color := Pal.WHITE
 var _t := 0.0
 
 
-func setup(rect: Rect2, radius: float, duration: float) -> Node2D:
+func setup(rect: Rect2, radius: float, duration: float, color: Color = Pal.WHITE) -> Node2D:
 	_rect = rect
 	_radius = radius
 	_dur = duration
+	_color = color
 	return self
 
 
@@ -25,4 +27,4 @@ func _process(delta: float) -> void:
 
 
 func _draw() -> void:
-	Shapes.fill_rr(self, _rect, _radius, Color(Pal.WHITE, maxf(0.0, 1.0 - _t / _dur)))
+	Shapes.fill_rr(self, _rect, _radius, Color(_color, maxf(0.0, 1.0 - _t / _dur)))

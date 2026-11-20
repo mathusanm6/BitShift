@@ -86,28 +86,42 @@ func _update_level() -> void:
 
 # ---------------------------------------------------------------- scoring
 
-func on_lock_cracked(_col: int) -> void:
+func on_lock_cracked(col: int) -> void:
 	combo += 1
 	award(5 * level)
+	_emit_combo_hit(col)
 
 
-func on_bit_shot(_bit: Bit, _col: int) -> void:
+func on_bit_shot(_bit: Bit, col: int) -> void:
 	combo += 1
 	destroyed += 1
 	award(roundi(10 * level * (1 + (combo - 1) * 0.1)))
 	Events.sound(&"shatter", mini(10, combo))
+	_emit_combo_hit(col)
 
 
-func on_misfired(_col: int) -> void:
+func on_misfired(col: int) -> void:
+	var prev := combo
 	combo = 0
+	if prev > 0:
+		Events.combo_lost.emit(prev, col)
+		if prev >= 2:
+			Events.sound(&"combo_lost", prev)
 
 
-func on_lasered(_col: int, count: int) -> void:
+func on_lasered(col: int, count: int) -> void:
 	if count == 0:
 		return
 	destroyed += count
 	award(count * 15 * level)
 	combo += count
+	_emit_combo_hit(col)
+
+
+func _emit_combo_hit(col: int) -> void:
+	Events.combo_hit.emit(combo, col)
+	if combo >= 2:
+		Events.sound(&"combo_hit", combo)
 
 
 func on_row_cleared(row: int) -> void:

@@ -113,3 +113,7 @@ func _warm_up() -> void:
 		_sfx.stream(&"key_up", pitch)
 	for combo in 11:
 		_sfx.stream(&"shatter", combo)
+	for combo in range(2, 16):
+		_sfx.stream(&"combo_hit", combo)
+	_sfx.stream(&"combo_lost", 2.0)
+	_sfx.stream(&"combo_lost", 5.0)

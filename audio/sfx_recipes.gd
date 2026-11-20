@@ -24,6 +24,8 @@ static func voices(sound: StringName, arg: float, rng: RandomNumberGenerator) ->
 		&"shatter": return [V.noise(0, 0.1, "highpass", 3200, 0.7, 0.3), V.osc(0, 0.1, "triangle", 1046 * (1 + arg * 0.06), 800, 0.14)]
 		&"crack": return [V.noise(0, 0.05, "bandpass", 2600, 2, 0.8), V.osc(0, 0.06, "square", 720, 240, 0.2), V.noise(0.02, 0.09, "highpass", 5200, 0.7, 0.28)]
 		&"misfire": return [V.osc(0, 0.1, "square", 210, 90, 0.22), V.noise(0, 0.04, "lowpass", 1100, 1, 0.6)]
+		&"combo_hit": return _combo_hit(arg)
+		&"combo_lost": return _combo_lost(arg)
 		&"land": return [V.noise(0, 0.018, "bandpass", 900, 1.4, 0.2)]
 		&"row_clear": return _row_clear(arg)
 		&"hit": return [V.osc(0, 0.22, "sine", 130, 38, 0.95), V.noise(0, 0.1, "lowpass", 1300, 0.8, 0.8), V.noise(0, 0.02, "highpass", 3000, 0.7, 0.4)]
@@ -66,3 +68,33 @@ static func _spark(rng: RandomNumberGenerator) -> Array[Dictionary]:
 	for i in rng.randi_range(3, 6):
 		out.append(V.noise(i * rng.randf_range(0.006, 0.02), rng.randf_range(0.004, 0.012), "highpass", rng.randf_range(4500, 8000), 0.7, rng.randf_range(0.05, 0.16)))
 	return out
+
+
+static func _combo_hit(combo: float) -> Array[Dictionary]:
+	var n := roundi(combo)
+	var base := 640.0 * pow(1.055, minf(float(n), 14.0))
+	var out: Array[Dictionary] = [
+		V.noise(0.0, 0.025, "highpass", 4200, 0.8, 0.45),
+		V.osc(0.0, 0.065, "sine", 240, 115, 0.42),
+		V.osc(0.0, 0.11, "triangle", base, base * 1.25, 0.36),
+		V.osc(0.0, 0.085, "square", base * 0.5, base * 0.5, 0.11),
+		V.osc(0.022, 0.13, "sine", base * 1.5, base * 1.5, 0.28),
+	]
+	if n >= 5 and n % 5 == 0:
+		out.append(V.noise(0.03, 0.16, "highpass", 3600, 0.7, 0.45))
+		out.append(V.osc(0.045, 0.16, "triangle", base * 2.0, base * 2.0, 0.32))
+		out.append(V.osc(0.09, 0.2, "sine", base * 2.5, base * 2.5, 0.26))
+	return out
+
+
+static func _combo_lost(prev_combo: float) -> Array[Dictionary]:
+	var big := prev_combo >= 5.0
+	var gain := 0.38 if big else 0.28
+	return [
+		V.osc(0.0, 0.24, "sine", 160, 36, 0.85 if big else 0.65),
+		V.noise(0.0, 0.03, "highpass", 3500, 0.8, 0.55),
+		V.noise(0.0, 0.15, "bandpass", 1400, 1.4, 0.75),
+		V.osc(0.0, 0.15, "sawtooth", 580, 140, gain),
+		V.osc(0.065, 0.24, "square", 360, 62, gain * 0.75, [32, 45]),
+		V.osc(0.065, 0.26, "triangle", 290, 52, gain * 1.1),
+	]

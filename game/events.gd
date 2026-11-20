@@ -12,6 +12,8 @@ signal ghost(b: int, from: Vector2, to: Vector2, height: float, duration: float)
 signal beam(col: int, color: Color, width: float, duration: float)
 signal row_flash(row: float)
 signal spare_launched(from: Vector2, duration: float)
+signal combo_hit(combo: int, col: int)
+signal combo_lost(prev_combo: int, col: int)
 signal clock_tick
 signal hurt
 signal wall_wrap
