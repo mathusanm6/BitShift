@@ -145,14 +145,11 @@ func start_tutorial() -> void:
 ## The mode, score and HP are left alone.
 func stage(board: Dictionary) -> void:
 	shots.clear()
-	keyboard.empty_slots()
 	if board.has("durability"):
 		keyboard.right_key.set_durability(board.durability, true)
 	field.set_board(board.rows)
 	gun.place(board.get("gun", 1))
 	gun.barrel.fill(board.get("barrel", []))
-	if board.has("slot"):
-		keyboard.slots[0].cartridge = board.slot.duplicate()
 	spawner.active = board.get("waves", true)
 	spawner.countdown = board.get("next_wave", 14.0)
 

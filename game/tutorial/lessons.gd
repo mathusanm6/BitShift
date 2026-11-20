@@ -42,19 +42,6 @@ const ALL: Array[Dictionary] = [
 		steps = [&"R", &"L", &"R", &"L", &"R", 1.2, &"L", &"B1", &"F"],
 	},
 	{
-		title = "SIPHON",
-		text = "An empty slot (Q, W, E) siphons the lowest bit of each column above the gun. Locked bits stay put. It counts as destroying them.",
-		rows = ["0[1]10_", "1001_"], gun = 0, waves = false,
-		steps = [0.6, &"S0"],
-	},
-	{
-		title = "PASTE AND DASH",
-		text = "A loaded slot pastes into the barrel, then dashes the gun 3 columns right. A matching bit becomes a laser (pierces 3 bits), a different one a flipper (inverts the column).",
-		rows = ["10101", "01101", "11010", "00110"], gun = 0, waves = false,
-		barrel = [1, 1, 0, 0], slot = [1, 0, 1, 0],
-		steps = [0.8, &"S0", 0.9, &"F"],
-	},
-	{
 		title = "THE CEILING",
 		text = "Waves keep falling, faster every 24 bits destroyed. When a stack settles above the top row, the run is over.",
 		rows = ["01010", "10101", "01010", "10101", "01010", "10101", "01010", "10101", "01010", "10_01", "_1_0_"],

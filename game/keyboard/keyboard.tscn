@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://game/keyboard/keyboard.gd" id="1_keyboard"]
 [ext_resource type="Script" path="res://game/keyboard/key_cap.gd" id="2_key_cap"]
 [ext_resource type="Script" path="res://game/keyboard/fire_key.gd" id="3_fire_key"]
-[ext_resource type="Script" path="res://game/keyboard/slot_key.gd" id="4_slot_key"]
 [ext_resource type="Script" path="res://game/keyboard/right_key.gd" id="5_right_key"]
 [ext_resource type="Script" path="res://game/keyboard/switch_art.gd" id="6_switch_art"]
 [ext_resource type="Script" path="res://game/ui/print_label.gd" id="7_print_label"]
@@ -50,27 +49,6 @@ legend = "FIRE"
 hint_key = 32
 click_pitch = 0.65
 tilt_scale = 0.25
-
-[node name="S0" type="Node2D" parent="."]
-script = ExtResource("4_slot_key")
-id = &"S0"
-palette = &"putty"
-hint_key = 81
-click_pitch = 1.2
-
-[node name="S1" type="Node2D" parent="."]
-script = ExtResource("4_slot_key")
-id = &"S1"
-palette = &"putty"
-hint_key = 87
-click_pitch = 1.2
-
-[node name="S2" type="Node2D" parent="."]
-script = ExtResource("4_slot_key")
-id = &"S2"
-palette = &"putty"
-hint_key = 69
-click_pitch = 1.2
 
 [node name="R" type="Node2D" parent="."]
 script = ExtResource("5_right_key")

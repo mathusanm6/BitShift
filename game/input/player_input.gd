@@ -6,7 +6,7 @@ extends Node
 
 const ACTION_KEYS: Dictionary[StringName, StringName] = {
 	&"bs_slide_left": &"L", &"bs_bit_0": &"B0", &"bs_bit_1": &"B1", &"bs_slide_right": &"R",
-	&"bs_fire": &"F", &"bs_slot_1": &"S0", &"bs_slot_2": &"S1", &"bs_slot_3": &"S2",
+	&"bs_fire": &"F",
 }
 ## Touch index used for the mouse.
 const MOUSE_POINTER := -1

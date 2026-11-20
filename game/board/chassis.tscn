@@ -174,7 +174,7 @@ family = 1
 font_px = 11.0
 ink = &"INK"
 spacing = 0.44
-baseline = Vector2(14, 714)
+baseline = Vector2(14, 650)
 align = 0
 
 [node name="LoadLegend" type="Label" parent="."]
@@ -184,7 +184,7 @@ family = 1
 font_px = 11.0
 ink = &"INK"
 spacing = 0.44
-baseline = Vector2(280, 714)
+baseline = Vector2(280, 650)
 align = 1
 
 [node name="DurabilityLegend" type="Label" parent="."]
@@ -194,12 +194,12 @@ family = 1
 font_px = 11.0
 ink = &"INK"
 spacing = 0.88
-baseline = Vector2(423.5, 714)
+baseline = Vector2(423.5, 650)
 align = 0
 
 [node name="Footer" type="Label" parent="."]
 script = ExtResource("2_print_label")
-text = "EMPTY SLOT SIPHONS 4 BITS.  FILLED SLOT LOADS AND DASHES RIGHT."
+text = "0 AND 1 LOAD RIGHT CHAMBER.  MATCHING BITS SHATTER."
 family = 1
 font_px = 11.0
 ink = &"INK"

@@ -1,8 +1,8 @@
 class_name DemoBot
 extends Node
 ## Plays the attract-mode demo. It picks the busiest stretch of columns,
-## walks the gun there, loads bits matching the lowest ones and fires. Every
-## fifth plan it siphons and pastes a slot instead. It refits a broken >> key.
+## walks the gun there, loads bits matching the lowest ones and fires. It
+## refits a broken >> key.
 
 ## Emitted for each key the bot plays. Game connects it to Game.act.
 signal pressed(id: StringName)
@@ -67,8 +67,6 @@ func _tick_refit(dt: float) -> void:
 
 func _next_plan() -> Array[Variant]:
 	_plans_made += 1
-	if _plans_made % 5 == 0 and not field.is_empty():
-		return [&"S0", &"S0", &"F"]
 	var target := _busiest_aim()
 	var plan: Array[Variant] = []
 	var at := gun.column

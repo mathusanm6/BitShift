@@ -1,8 +1,10 @@
 class_name Gun
 extends Node2D
-## The cannon carriage under the field. Tracks which column it covers, slides
-## and wraps, and springs its drawn position and recoil toward that. While it
-## wraps it is drawn twice: leaving one edge and entering the other.
+## The cannon carriage under the field. Tracks which column it covers, slides,
+## and springs its drawn position and recoil toward that. Sliding past the left
+## wall slams into the HP bar and bounces back to the right.
+
+signal wall_impact
 
 const Lay := preload("res://game/layout.gd")
 
@@ -13,14 +15,14 @@ var _x := 1.0
 var _x_v := 0.0
 var _kick := 0.0
 var _kick_v := 0.0
+var _hitting_wall := false
 
 @onready var barrel: Barrel = $Barrel
-@onready var _views: Array[GunView] = [$View, $WrapView]
+@onready var _view: GunView = $View
 
 
 func _ready() -> void:
-	for view in _views:
-		view.barrel = barrel
+	_view.barrel = barrel
 
 
 ## Moves straight to a column, with no slide animation.
@@ -28,15 +30,17 @@ func place(c: int) -> void:
 	column = c
 	_x = c
 	_x_v = 0.0
+	_hitting_wall = false
 
 
-## Slides one column left. Off the left edge it wraps to the right: returns true.
+## Slides one column left. Off the left edge it bounces off the HP bar to the right: returns true.
 func slide_left() -> bool:
 	if column > 0:
 		column -= 1
 		return false
 	column = Lay.GUN_MAX
-	_x += Lay.N
+	_hitting_wall = true
+	_x_v = minf(_x_v, -10.0)
 	return true
 
 
@@ -66,18 +70,19 @@ func visual_column() -> float:
 
 func _process(delta: float) -> void:
 	var dt := minf(0.033, delta)
-	_x_v += (900 * (column - _x) - 48 * _x_v) * dt
-	_x += _x_v * dt
+	if _hitting_wall:
+		_x_v = move_toward(_x_v, -14.0, 220.0 * dt)
+		_x += _x_v * dt
+		if _x <= -0.15:
+			_x = -0.15
+			_x_v = 11.5
+			_hitting_wall = false
+			kick(120.0)
+			wall_impact.emit()
+	else:
+		_x_v += (900 * (column - _x) - 48 * _x_v) * dt
+		_x += _x_v * dt
 	_kick_v += (700 * (0.0 - _kick) - 22 * _kick_v) * dt
 	_kick += _kick_v * dt
-	var copies: Array[float] = [_x]
-	if _x > Lay.GUN_MAX + 0.01:
-		copies.append(_x - Lay.N)
-	elif _x < -0.01:
-		copies.append(_x + Lay.N)
-	for i in _views.size():
-		var view := _views[i]
-		view.visible = i < copies.size()
-		if view.visible:
-			view.position = Vector2(Lay.col_x(copies[i]), Lay.GUN_Y + _kick * 0.05)
-			view.refresh()
+	_view.position = Vector2(Lay.col_x(_x), Lay.GUN_Y + _kick * 0.05)
+	_view.refresh()
