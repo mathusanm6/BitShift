@@ -26,12 +26,6 @@ const BOARD_IDS: Dictionary[TestBoard, StringName] = {
 		enemy_speed = v
 		if is_node_ready():
 			game.spawner.speed_scale = v
-## Seconds a slot stays locked after it is pasted. 0 turns recharge off.
-@export_range(0.0, 10.0, 1.0, "suffix:s") var slot_recharge := 0.0:
-	set(v):
-		slot_recharge = v
-		if is_node_ready():
-			game.actions.recharge = v
 ## Pick a board to load it (starts a game if needed).
 @export var test_board := TestBoard.NONE:
 	set(v):
@@ -58,7 +52,6 @@ func _ready() -> void:
 
 func _apply_all() -> void:
 	enemy_speed = enemy_speed
-	slot_recharge = slot_recharge
 	log_events = log_events
 	_apply_board()
 	_apply_refit()

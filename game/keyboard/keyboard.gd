@@ -18,8 +18,6 @@ const Lay := preload("res://game/layout.gd")
 var live := false
 
 var keys: Dictionary[StringName, KeyCap] = {}
-## Slot 1 to 3, in order.
-var slots: Array[SlotKey] = []
 
 @onready var right_key: RightKey = $R
 
@@ -30,8 +28,6 @@ func _ready() -> void:
 			keys[child.id] = child
 			child.pressed.connect(_on_pressed)
 			child.released.connect(_on_released)
-	for id in Lay.SLOT_KEYS:
-		slots.append(keys[id])
 	right_key.debris_layer = debris_layer
 	field.bit_shot.connect(_on_bit_shot)
 
@@ -58,19 +54,11 @@ func release_all() -> void:
 		keys[k].release()
 
 
-func empty_slots() -> void:
-	for slot in slots:
-		slot.empty()
-
-
 func reset() -> void:
-	empty_slots()
 	right_key.reset()
 
 
 func tick(dt: float) -> void:
-	for slot in slots:
-		slot.tick(dt)
 	right_key.tick(dt)
 
 
