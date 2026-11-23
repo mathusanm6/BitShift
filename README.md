@@ -9,11 +9,11 @@
 ## Gameplay Demo
 
 <p align="center">
-  <a href="https://youtu.be/Nrycs1QVL5g">
+  <a href="https://youtube.com/shorts/vmq11YgHP1I">
     <img src="docs/video/youtube_card.png" alt="Watch BitShift Gameplay Demo on YouTube" width="360" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,0.5);">
   </a>
   <br><br>
-  <a href="https://youtu.be/Nrycs1QVL5g">
+  <a href="https://youtube.com/shorts/vmq11YgHP1I">
     <img src="https://img.shields.io/badge/YouTube-Watch%20Gameplay%20Demo-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch on YouTube">
   </a>
 </p>
@@ -45,25 +45,24 @@ Loading bits works like real digital hardware:
 - Existing bits slide left. If all 4 chambers are full, the oldest bit drops out.
 - Pressing **Space** fires all loaded chambers upward at once.
 
-### Matching vs. Misfires
+### Matching, Misfires & Locked Bits
 - **Match:** Hit a column with the same bit (`0` on `0`, `1` on `1`) to shatter it.
-- **Mismatch:** The shot sticks to the bottom of the column, pushing the stack closer to the top.
-- **Row Clears:** If an entire horizontal row across all 5 columns becomes the same bit, the whole row detonates for a score multiplier.
+- **Locked Bits:** Bits held in steel brackets take two matching shots—the first cracks the lock, the second shatters the bit.
+- **Mismatch:** The shot sticks to the bottom of the column, pushing the stack closer to the top and breaking your combo.
+- **Row Clears:** If an entire horizontal row across all 5 columns becomes the same bit, the whole row detonates for a big bonus—and cascading clears multiply as a chain.
+
+### Combos & Streaks
+Chaining clean hits without a misfire builds a live **Combo** multiplier:
+- Every consecutive hit raises your score multiplier and escalates the oscilloscope's edge aura, readout glow, and synthesized pitch through color tiers (`x2`, `x5`, `x10+`).
+- Big streaks trigger punchy hit-stop, screen shake, and milestone callouts.
+- A single misfire snaps the streak back to `x0`.
 
 ### The Broken Key
 The machine's physical hardware wears down as you play:
 - Sliding left (`<<`) is free and reliable.
-- Sliding right (`>>`) wears out the mechanical switch. After 3 uses, the keycap flies off and breaks.
-- To repair it, shoot green spare-switch bits (`*`) falling from the top.
-- If you're stuck without a right key, you can slam the cannon into the far left wall to wrap around to the right side—costing 1 HP in sparks and scraping metal.
-
-### Memory Slots & Superweapons
-You have three clipboard slots (keys **Q**, **W**, **E**):
-- **Siphon:** Pressing an empty slot sucks the bottom row of bits into memory.
-- **Paste:** Pressing a filled slot pastes those bits back into your cannon.
-  - Stacking matching bits transforms them into a **Laser** that cuts through up to 3 bits.
-  - Stacking differing bits creates an **Inversion Beam** that flips all bits in that column.
-  - Pasting also unleashes a 3-column **Recoil Dash** to the right, letting you move without wearing down your right key.
+- Sliding right (`>>`) wears out the mechanical switch. After 3 uses, the keycap works loose and breaks off.
+- To repair it, shoot bits carrying a green `+` spare-switch badge—the replacement flies in and restores 2 uses (or awards bonus points if the key is already intact).
+- If you're stuck without a right key, slam the cannon past the far left edge: it smashes into the HP bar and bounces back to the right side, costing 1 HP in sparks and scraping metal.
 
 ### Adaptive Procedural Audio
 There are no audio sample files (`.wav` or `.mp3`) in the project. All sound effects and the background music arpeggio are synthesized in real-time using GDScript math formulas and a 4-bit Linear Feedback Shift Register (LFSR).
@@ -80,7 +79,7 @@ There are no audio sample files (`.wav` or `.mp3`) in the project. All sound eff
 | Load 0 | `0` | `J` | Tap `0` |
 | Load 1 | `1` | `K` | Tap `1` |
 | Fire | `Space` | `Up` | Tap `FIRE` |
-| Memory Slots | `Q`, `W`, `E` | | Tap Slots 1–3 |
+| Toggle Music | `N` | | |
 | Pause | `P` or `Esc` | | |
 | Start / Restart | `Enter` | | Tap Start |
 
